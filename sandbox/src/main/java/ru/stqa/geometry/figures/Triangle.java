@@ -1,3 +1,5 @@
+package ru.stqa.geometry.figures;
+
 public class Triangle {
     double a;
     double b;
