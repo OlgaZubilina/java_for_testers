@@ -4,23 +4,25 @@ public class Triangle {
     double a;
     double b;
     double c;
+    
 
 
     public Triangle(double a, double b, double c) {
         this.a = a;
         this.b = b;
         this.c = c;
+
     }
 
     public double perimeter() {
-        return this.a + this.b + this.c;
+double p =(this.a+this.b+this.c);
+        return p;
 
 
     }
 
     public double area() {
-        double p = (this.a + this.b + this.c) / 2;
-        double S = Math.sqrt((p * (p - this.a) * (p - this.b) * (p - this.c)));
+        double S = Math.sqrt(((this.perimeter()/2) * ((this.perimeter()/2) - this.a) * ((this.perimeter()/2) - this.b) * ((this.perimeter()/2) - this.c)));
         return S;
 
     }
