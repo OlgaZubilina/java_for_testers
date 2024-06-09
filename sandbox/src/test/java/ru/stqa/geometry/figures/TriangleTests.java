@@ -100,6 +100,27 @@ public class TriangleTests {
          }
      }
 
+     @Test //Сравнение треугольников
+    void equalityTriangle(){
+        var t0 = new Triangle(3.0,4.0,5.0);
+        var t1 = new Triangle(3.0,4.0,5.0);
+        var t2 = new Triangle(3.0,5.0,4.0);
+        var t3 = new Triangle(5.0,3.0,4.0);
+        var t4 = new Triangle(5.0,4.0,3.0);
+        var t5 = new Triangle(4.0,5.0,3.0);
+        var t6 = new Triangle(4.0,3.0,5.0);
+        Assertions.assertTrue(t0.equals(t1));
+        Assertions.assertTrue(t0.equals(t2));
+        Assertions.assertTrue(t0.equals(t3));
+        Assertions.assertTrue(t0.equals(t4));
+        Assertions.assertTrue(t0.equals(t5));
+        Assertions.assertTrue(t0.equals(t6));
+
+
+    }
+
+
+
 }
 
 
