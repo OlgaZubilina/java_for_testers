@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
-public class deleteGroup {
+public class DeleteGroup {
     private WebDriver driver;
 
     @BeforeEach
