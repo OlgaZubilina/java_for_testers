@@ -15,8 +15,8 @@ public record ContactData(String firstname,String middlename,String lastname,Str
                 this.title, this.company, this.address, this.home, this.mobile, this.work, this.fax, this.email, this.email2, this.email3, this.homepage);
     }
 
-    public ContactData withAdresss(String adress) {
+    public ContactData withAdress(String adress) {
         return new ContactData(this.firstname, this.middlename, lastname, this.nickname,
-                this.title, this.company, this.address, this.home, this.mobile, this.work, this.fax, this.email, this.email2, this.email3, this.homepage);
+                this.title, this.company, adress, this.home, this.mobile, this.work, this.fax, this.email, this.email2, this.email3, this.homepage);
     }
 }

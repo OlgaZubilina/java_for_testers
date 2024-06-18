@@ -24,6 +24,6 @@ public class CreateContact extends TestBase {
     @Test
     public void canCreateContactWidthAdress() {
 
-        app.contacts().createContact(new ContactData().withAdresss("adress1"));
+        app.contacts().createContact(new ContactData().withAdress("adress1"));
     }
 }
