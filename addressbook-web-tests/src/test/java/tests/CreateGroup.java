@@ -43,6 +43,7 @@ public class CreateGroup extends TestBase {
         int newGroupCount = app.groups().getCount();
         Assertions.assertEquals(groupCount+1,newGroupCount);}
 
+
     public static List<GroupData> negativeGroupProvider() {
         var result = new ArrayList<GroupData>(List.of(
                 new GroupData("", "group name'","","")));
