@@ -123,7 +123,6 @@ public class ContactsHelper extends HelperBase {
     public int getCount() {
         openContactsPage();
         return manager.driver.findElements(By.name("selected[]")).size();
-
     }
 
     public List<ContactData> getList() {
