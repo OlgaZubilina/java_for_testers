@@ -128,11 +128,14 @@ public class ContactsHelper extends HelperBase {
 
     public List<ContactData> getList() {
       var contacts =  new ArrayList<ContactData>();
-       var tds = manager.driver.findElements(By.cssSelector("td.center"));
-       for (var td : tds){
-           var firstname = manager.driver.findElement(By.cssSelector("tr:nth-child(tr) > td:nth-child(3)")).getText();
-           var lastname = manager.driver.findElement(By.cssSelector("tr:nth-child(tr) > td:nth-child(2)")).getText();
-           contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
+      var trs =  manager.driver.findElements(By.cssSelector("tr.entry"));
+      for (tr : trs) {
+
+          for (int i = 0;i<3;i++){
+              var text = manager.driver.findElement(By.cssSelector("td.center")).getText();
+              if (i == 1){ var firstname = text;}
+              else if (i ==2) {var lastname = text;}}
+          contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
         }
        return contacts;
     }
