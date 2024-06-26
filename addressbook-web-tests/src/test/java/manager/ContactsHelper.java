@@ -124,18 +124,18 @@ public class ContactsHelper extends HelperBase {
         openContactsPage();
         return manager.driver.findElements(By.name("selected[]")).size();
     }
-
     public List<ContactData> getList() {
-      var contacts =  new ArrayList<ContactData>();
-      var trs =  manager.driver.findElements(By.cssSelector("tr.entry"));
-      for (tr : trs) {
+        var contacts =  new ArrayList<ContactData>();
 
-          for (int i = 0;i<3;i++){
-              var text = manager.driver.findElement(By.cssSelector("td.center")).getText();
-              if (i == 1){ var firstname = text;}
-              else if (i ==2) {var lastname = text;}}
-          contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
+            var trs =  manager.driver.findElements(By.cssSelector("tr.entry"));
+            for (tr : trs) {
+
+                for (int i = 0;i<3;i++){
+                    var text = manager.driver.findElement(By.cssSelector("td.center")).getText();
+                    if (i == 1){ var firstname = text;}
+                    else if (i ==2) {var lastname = text;}}
+                contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
+            }
+            return contacts;
         }
-       return contacts;
-    }
-}
+ }
