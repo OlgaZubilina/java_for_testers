@@ -1,9 +1,7 @@
 package manager;
 
 import model.ContactData;
-import model.GroupData;
 import org.openqa.selenium.By;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,14 +128,21 @@ public class ContactsHelper extends HelperBase {
 
     public List<ContactData> getList() {
         var contacts = new ArrayList<ContactData>();
-        var trs = manager.driver.findElements(By.cssSelector("tr.entry"));
+        var trs = manager.driver.findElements(By.name("entry"));
+
         for (var tr : trs) {
-            var tds = tr.findElements(By.cssSelector("td.center"));
-            var id = tds.get(0).getAttribute("id");
-            var lastname = tds.get(1).getText();
-            var firstname = tds.get(2).getText();
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
-        }
+            var tds = tr.findElements(By.cssSelector("td"));
+            for (var td : tds) {
+                var checkbox = td.findElement(By.name("selected[]"));
+                var id = checkbox.getAttribute("value");
+                var lastname = tds.get(1).getText();
+                var firstname = tds.get(2).getText();
+                contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+            }
+
+
+    }
         return contacts;
     }
- }
+}
+
