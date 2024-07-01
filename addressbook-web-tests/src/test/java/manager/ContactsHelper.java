@@ -10,14 +10,16 @@ import java.util.List;
 public class ContactsHelper extends HelperBase {
 
 
-    public ContactsHelper (ApplicationManager manager){
+    public ContactsHelper(ApplicationManager manager) {
         super(manager);
     }
-    public  void createContact(ContactData contact) {
+
+    public void createContact(ContactData contact) {
         openContactCreatePage();
         fillContactForm(contact);
         submitCreateContact();
     }
+
     public void deleteContact(ContactData contact) {
         openContactsPage();
         selectContact(contact);
@@ -25,6 +27,7 @@ public class ContactsHelper extends HelperBase {
 
 
     }
+
     public void updateContact(ContactData updateContact) {
         openContactsPage();
         selectContact(null);
@@ -57,12 +60,11 @@ public class ContactsHelper extends HelperBase {
             manager.driver.findElement(By.linkText("home")).click();
         }
     }
+
     public boolean isContactPresent() {
         openContactsPage();
         return manager.isElementPresent(By.name("searchform"));
     }
-
-
 
 
     private void submitCreateContact() {
@@ -120,22 +122,22 @@ public class ContactsHelper extends HelperBase {
 
         }
     }
+
     public int getCount() {
         openContactsPage();
         return manager.driver.findElements(By.name("selected[]")).size();
     }
+
     public List<ContactData> getList() {
-        var contacts =  new ArrayList<ContactData>();
-
-            var trs =  manager.driver.findElements(By.cssSelector("tr.entry"));
-            for (tr : trs) {
-
-                for (int i = 0;i<3;i++){
-                    var text = manager.driver.findElement(By.cssSelector("td.center")).getText();
-                    if (i == 1){ var firstname = text;}
-                    else if (i ==2) {var lastname = text;}}
-                contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
-            }
-            return contacts;
+        var contacts = new ArrayList<ContactData>();
+        var trs = manager.driver.findElements(By.cssSelector("tr.entry"));
+        for (var tr : trs) {
+            var tds = tr.findElements(By.cssSelector("td.center"));
+            var id = tds.get(0).getAttribute("id");
+            var lastname = tds.get(1).getText();
+            var firstname = tds.get(2).getText();
+            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
+        return contacts;
+    }
  }
