@@ -49,7 +49,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     private void selectContact(ContactData contact) {
-        manager.driver.findElement(By.name("selected[]")).click();
+        click(By.cssSelector(String.format("input[value='%s']",contact.id())));
     }
 
 
@@ -129,16 +129,16 @@ public class ContactsHelper extends HelperBase {
     public List<ContactData> getList() {
         var contacts = new ArrayList<ContactData>();
         var trs = manager.driver.findElements(By.name("entry"));
-
         for (var tr : trs) {
             var tds = tr.findElements(By.cssSelector("td"));
             for (var td : tds) {
-                var checkbox = td.findElement(By.name("selected[]"));
-                var id = checkbox.getAttribute("value");
+               var check = td.findElement(By.name("selected[]"));
+                var id = check.getAttribute("value");
                 var lastname = tds.get(1).getText();
                 var firstname = tds.get(2).getText();
                 contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
-            }
+            break;}
+
 
 
     }
