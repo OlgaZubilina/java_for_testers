@@ -26,10 +26,10 @@ public class ContactsHelper extends HelperBase {
 
     }
 
-    public void updateContact(ContactData updateContact) {
+    public void updateContact(ContactData contact,ContactData updateContact) {
         openContactsPage();
-        selectContact(null);
-        openContact();
+        //selectContact(contact);
+        openContact(contact);
         fillContactForm(updateContact);
         submitUpdateContact();
 
@@ -40,9 +40,10 @@ public class ContactsHelper extends HelperBase {
         click(By.cssSelector("input:nth-child(74)"));
     }
 
-    private void openContact() {
-        click(By.xpath("(//img[@alt=\'Edit\'])"));
+    private void openContact(ContactData contact) {
+        click(By.partialLinkText(String.format("edit.php?id=%s",contact.id())));
     }
+
 
     private void submitDeleteContact() {
         click(By.cssSelector(".left:nth-child(8) > input"));
@@ -127,6 +128,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     public List<ContactData> getList() {
+        openContactsPage();
         var contacts = new ArrayList<ContactData>();
         var trs = manager.driver.findElements(By.name("entry"));
         for (var tr : trs) {
