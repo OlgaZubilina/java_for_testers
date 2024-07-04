@@ -1,6 +1,6 @@
-package manager;
+package ru.stqa.adressbook.manager;
 
-import model.ContactData;
+import ru.stqa.adressbook.model.ContactData;
 import org.openqa.selenium.By;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +75,7 @@ public class ContactsHelper extends HelperBase {
         type(By.name("middlename"), contact.middlename());
         type(By.name("lastname"), contact.lastname());
         type(By.name("nickname"), contact.nickname());
+        attach(By.name("photo"),contact.photo());
         //driver.findElement(By.name("photo")).click();
         // driver.findElement(By.name("photo")).sendKeys("C:\Users\Work\Desktop\скрины\Screenshot_1.png");
         type(By.name("title"), contact.title());

@@ -1,7 +1,6 @@
-package tests;
+package ru.stqa.adressbook.tests;
 
-import model.ContactData;
-import model.GroupData;
+import ru.stqa.adressbook.model.ContactData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ public class UpdateContact extends TestBase {
     @Test
     void canUpdateContact() {
    if(!app.contacts().isContactPresent()){
-    app.contacts().createContact(new ContactData("id","firstname", "middlename", "lastname", "nickname", "title", "company", "adress", "home", "mobile", "work", "fax", "email", "email2", "email3", "homepage"));
+    app.contacts().createContact(new ContactData("id","firstname", "middlename", "lastname", "nickname", "title", "company", "adress", "photo","home", "mobile", "work", "fax", "email", "email2", "email3", "homepage"));
         }
         var oldContacts = app.contacts().getList();
         var rnd = new Random();
