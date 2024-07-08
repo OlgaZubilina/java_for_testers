@@ -15,19 +15,36 @@ public class DeleteContact extends TestBase {
         if (!app.contacts().isContactPresent()) {//создание нового контакта  при отсутствии
             app.contacts().createContact(new ContactData());
         }
-        int contactCount = app.contacts().getCount();
-        List<ContactData> oldContacts = app.contacts().getList();
+
+        var oldContacts = app.contacts().getList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());
         app.contacts().deleteContact(oldContacts.get(index));
-        List<ContactData> newContacts = app.contacts().getList();
+        var newContacts = app.contacts().getList();
         var expectedList = new ArrayList<>(oldContacts);
         expectedList.remove(index);
         Assertions.assertEquals(newContacts, expectedList);
 
     }
 
+@Test
+    public void canRemoveContactHbm(){
 
+    if (!app.contacts().isContactPresent()) {//создание нового контакта  при отсутствии
+        app.contacts().createContact(new ContactData());
+    }
 
+    var oldContacts = app.hbm().getContactList();
+    var rnd = new Random();
+    var index = rnd.nextInt(oldContacts.size());
+    app.contacts().deleteContact(oldContacts.get(index));
+    var newContacts = app.hbm().getContactList();
+    var expectedList = new ArrayList<>(oldContacts);
+    expectedList.remove(index);
+    Assertions.assertEquals(newContacts, expectedList);
 
 }
+}
+
+
+
