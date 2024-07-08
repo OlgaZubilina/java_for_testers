@@ -13,9 +13,13 @@ public class UpdateContact extends TestBase {
 
     @Test
     void canUpdateContact() {
-   if(!app.contacts().isContactPresent()){
-    app.contacts().createContact(new ContactData("id","firstname",  "lastname", "adress", ""));
-        }
+        if (app.jdbc().getContactList().size() == 0) {//создание нового контакта  при отсутствии
+            var contact = new ContactData()
+                    .withFirstname(CommonFunctions.randomString(6))
+                    .withLastname(CommonFunctions.randomString(6))
+                    .withAdress(CommonFunctions.randomString(6))
+                    .withPhoto(CommonFunctions.randomFile("src/test/resources/images"));
+            app.contacts().createContact(contact);}
         var oldContacts = app.contacts().getList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());
@@ -34,9 +38,13 @@ public class UpdateContact extends TestBase {
 
    @Test
     void canUpdateContactHbm() {
-        if(!app.contacts().isContactPresent()){
-            app.contacts().createContact(new ContactData("id","firstname",  "lastname", "adress", ""));
-        }
+       if (app.hbm().getContactList().size() == 0) {//создание нового контакта  при отсутствии
+           var contact = new ContactData()
+                   .withFirstname(CommonFunctions.randomString(6))
+                   .withLastname(CommonFunctions.randomString(6))
+                   .withAdress(CommonFunctions.randomString(6))
+                   .withPhoto(CommonFunctions.randomFile("src/test/resources/images"));
+           app.contacts().createContact(contact);}
         var oldContacts = app.hbm().getContactList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());

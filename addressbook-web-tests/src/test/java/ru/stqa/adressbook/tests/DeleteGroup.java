@@ -31,7 +31,7 @@ public class DeleteGroup extends TestBase {
     @Test
 
     public void canRemoveGroupHbm() {
-        if (app.groups().getCount() == 0) {//создание новой группы при отсутствии созданных групп
+        if (app.hbm().getGroupList().size() == 0) {//создание новой группы при отсутствии созданных групп
             app.groups().createGroup(new GroupData("", "name", "header", "footer"));
         }
         var oldGroups = app.hbm().getGroupList();
@@ -56,7 +56,7 @@ public class DeleteGroup extends TestBase {
 
     @Test
     public void canRemoveAllGroupsHbm() {
-        if (app.groups().getCount() == 0) {//создание новой группы при отсутствии созданных групп
+        if (app.hbm().getGroupList().size() == 0) {//создание новой группы при отсутствии созданных групп
             app.groups().createGroup(new GroupData("", "name", "header", "footer"));
         }
         app.groups().deleteAllGroups();

@@ -32,7 +32,7 @@ public class UpdateGroup extends TestBase{
 }
 @Test
     void canUpdateGroupHbm() {
-    if (app.groups().getCount()==0){
+    if (app.hbm().getGroupList().size()==0){
         app.groups().createGroup(new GroupData("", "group name","group header","group footer"));
     }
     var oldGroups = app.hbm().getGroupList();
