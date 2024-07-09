@@ -6,6 +6,7 @@ import ru.stqa.adressbook.model.GroupData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class JdbcHelper extends HelperBase {
@@ -55,4 +56,44 @@ public class JdbcHelper extends HelperBase {
                 throw new RuntimeException(e);
             }
         }
-    }
+
+  public List <ContactData> getListContactsInGroup() { var contacts = new ArrayList<ContactData>();
+      try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
+           var statement = conn.createStatement();
+           var result = statement.executeQuery("SELECT ab.id, ab.firstname, ab.lastname, ab.address\n" +
+                   "FROM addressbook ab INNER JOIN address_in_groups ag ON ab.id = ag.id")) {
+
+          while (result.next()) {
+
+              contacts.add(new ContactData()
+                      .withId(result.getString("id"))
+                      .withFirstname(result.getString("firstname"))
+                      .withLastname(result.getString("lastname"))
+                      .withAdress(result.getString("address")));
+
+          }
+          return contacts;
+      } catch (SQLException e) {
+          throw new RuntimeException(e);
+      }
+}
+
+    public List<ContactData> getContactListWithoutGroup() {var contacts = new ArrayList<ContactData>();
+        try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
+             var statement = conn.createStatement();
+             var result = statement.executeQuery("SELECT ab.id, ab.firstname, ab.lastname, ab.address FROM addressbook ab LEFT JOIN address_in_groups ag ON ab.id = ag.id WHERE ag.id IS NULL")) {
+
+            while (result.next()) {
+
+                contacts.add(new ContactData()
+                        .withId(result.getString("id"))
+                        .withFirstname(result.getString("firstname"))
+                        .withLastname(result.getString("lastname"))
+                        .withAdress(result.getString("address")));
+
+            }
+            return contacts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }    }
+}
