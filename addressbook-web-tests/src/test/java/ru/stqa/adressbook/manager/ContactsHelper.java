@@ -173,5 +173,14 @@ public class ContactsHelper extends HelperBase {
     private void selectGroupInContact(GroupData group) {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
+
+    public void filterContactsByAll() {
+        openContactsPage();
+        selectFilterNone();
+    }
+
+    private void selectFilterNone() {
+        new Select(manager.driver.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
 }
 

@@ -60,16 +60,14 @@ public class JdbcHelper extends HelperBase {
   public List <ContactData> getListContactsInGroup() { var contacts = new ArrayList<ContactData>();
       try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
            var statement = conn.createStatement();
-           var result = statement.executeQuery("SELECT ab.id, ab.firstname, ab.lastname, ab.address\n" +
-                   "FROM addressbook ab INNER JOIN address_in_groups ag ON ab.id = ag.id")) {
+           var result = statement.executeQuery("SELECT ab.id, ab.firstname, ab.lastname FROM addressbook ab INNER JOIN address_in_groups ag ON ab.id = ag.id")) {
 
           while (result.next()) {
 
               contacts.add(new ContactData()
                       .withId(result.getString("id"))
                       .withFirstname(result.getString("firstname"))
-                      .withLastname(result.getString("lastname"))
-                      .withAdress(result.getString("address")));
+                      .withLastname(result.getString("lastname")));
 
           }
           return contacts;
@@ -81,7 +79,26 @@ public class JdbcHelper extends HelperBase {
     public List<ContactData> getContactListWithoutGroup() {var contacts = new ArrayList<ContactData>();
         try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
              var statement = conn.createStatement();
-             var result = statement.executeQuery("SELECT ab.id, ab.firstname, ab.lastname, ab.address FROM addressbook ab LEFT JOIN address_in_groups ag ON ab.id = ag.id WHERE ag.id IS NULL")) {
+             var result = statement.executeQuery("SELECT ab.id, ab.firstname, ab.lastname FROM addressbook ab LEFT JOIN address_in_groups ag ON ab.id = ag.id WHERE ag.id IS NULL")) {
+
+            while (result.next()) {
+
+                contacts.add(new ContactData()
+                        .withId(result.getString("id"))
+                        .withFirstname(result.getString("firstname"))
+                        .withLastname(result.getString("lastname")));
+
+            }
+            return contacts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }    }
+
+    /*public List<ContactData> getContactListWithoutGroupTest(GroupData group) {var contacts = new ArrayList<ContactData>();
+        try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
+             var statement = conn.createStatement();
+             String list = ("SELECT ab.id, ab.firstname, ab.lastname FROM addressbook ab LEFT JOIN address_in_groups ag ON ag.group_id!="+ group.id().toString());
+             var result = statement.executeQuery(list)) {
 
             while (result.next()) {
 
@@ -95,5 +112,5 @@ public class JdbcHelper extends HelperBase {
             return contacts;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }    }
+        }    }*/
 }

@@ -41,6 +41,7 @@ var contactsFilter = app.contacts().getList();
         newContactsWithoutGroup.sort(compareById);
         expectedList.sort(compareById);
         Assertions.assertEquals(newContactsWithoutGroup, expectedList);
-    }
+
+}
 
 }
