@@ -82,13 +82,13 @@ public class ContactsHelper extends HelperBase {
         // type(By.name("title"), contact.title());
         //type(By.name("company"), contact.company());
         type(By.name("address"), contact.address());
-        //type(By.name("home"), contact.home());
-        //type(By.name("mobile"), contact.mobile());
-        //type(By.name("work"), contact.work());
+        type(By.name("home"), contact.home());
+        type(By.name("mobile"), contact.mobile());
+        type(By.name("work"), contact.work());
         //type(By.name("fax"), contact.fax());
-        //type(By.name("email"), contact.email());
-        //type(By.name("email2"), contact.email2());
-        // type(By.name("email3"), contact.email3());
+        type(By.name("email"), contact.email());
+        type(By.name("email2"), contact.email2());
+        type(By.name("email3"), contact.email3());
         //type(By.name("homepage"), contact.homepage());
 
     }
@@ -181,6 +181,34 @@ public class ContactsHelper extends HelperBase {
 
     private void selectFilterNone() {
         new Select(manager.driver.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
+
+    public String getPhones(ContactData contact) {
+        return manager.driver.findElement(By.xpath(String.format("//input[@id='%s']/../../td[6]",contact.id()))).getText();
+    }
+
+    public String getEmails(ContactData contact) {
+        return manager.driver.findElement(By.xpath(String.format("//input[@id='%s']/../../td[5]",contact.id()))).getText();
+    }
+
+
+    public String getAddress(ContactData contact) {
+        return manager.driver.findElement(By.xpath(String.format("//input[@id='%s']/../../td[4]",contact.id()))).getText();
+    }
+
+    public String getInfoFromContactPage(ContactData contact){
+        openContact(contact);
+        String info = manager.driver.findElement(By.name("address")).getText()
+                +"\n"+manager.driver.findElement(By.name("email")).getAttribute("value")
+                +"\n"+manager.driver.findElement(By.name("email2")).getAttribute("value")
+                +"\n"+manager.driver.findElement(By.name("email3")).getAttribute("value")
+                +"\n"+manager.driver.findElement(By.name("home")).getAttribute("value")
+                +"\n"+manager.driver.findElement(By.name("mobile")).getAttribute("value")
+                +"\n"+manager.driver.findElement(By.name("work")).getAttribute("value");
+        return info;
+
+
+
     }
 }
 

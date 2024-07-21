@@ -8,8 +8,8 @@ import ru.stqa.adressbook.manager.hbm.GroupRecord;
 import ru.stqa.adressbook.model.ContactData;
 import ru.stqa.adressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HibernateHelper extends HelperBase {
     private SessionFactory sessionFactory;
@@ -28,11 +28,7 @@ public class HibernateHelper extends HelperBase {
     }
 
     static List<GroupData> convertList(List<GroupRecord> records) {
-        List<GroupData> result = new ArrayList<>();
-        for (var record : records) {
-            result.add(convert(record));
-        }
-        return result;
+       return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
     private static GroupData convert(GroupRecord record) {
@@ -45,16 +41,22 @@ public class HibernateHelper extends HelperBase {
         }));
     }
 
+
     static List<ContactData> convertListContacts(List<ContactRecord> records) {
-        List<ContactData> result = new ArrayList<>();
-        for (var record : records) {
-            result.add(convert(record));
-        }
-        return result;
+        return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
     private static ContactData convert(ContactRecord record) {
-        return new ContactData(""+record.id,record.firstname,record.lastname,record.address,"");
+        return new ContactData().withId(""+record.id)
+                .withFirstname(record.firstname)
+                .withLastname(record.lastname)
+                .withAdress(record.address)
+                .withHome(record.home)
+                .withMobile(record.mobile)
+                .withWork(record.work)
+                .withEmail(record.email)
+                .withEmail2(record.email2)
+                .withEmail3(record.email3);
     }
 
     public List<ContactData> getContactList() {
@@ -63,3 +65,7 @@ public class HibernateHelper extends HelperBase {
         }));
     }
 }
+
+
+
+
