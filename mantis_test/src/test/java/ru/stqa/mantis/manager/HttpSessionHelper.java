@@ -4,6 +4,7 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.net.CookieManager;
+import java.util.regex.Pattern;
 
 public class HttpSessionHelper extends HelperBase{
 
@@ -44,4 +45,6 @@ public class HttpSessionHelper extends HelperBase{
                 new RuntimeException(e);
         }
     }
+
+
 }
