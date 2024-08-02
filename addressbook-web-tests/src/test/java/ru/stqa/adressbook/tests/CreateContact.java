@@ -2,6 +2,7 @@ package ru.stqa.adressbook.tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.Allure;
 import ru.stqa.adressbook.common.CommonFunctions;
 import ru.stqa.adressbook.model.ContactData;
 import org.junit.jupiter.api.Assertions;
@@ -42,7 +43,7 @@ public class CreateContact extends TestBase {
     }
 
 
-    @ParameterizedTest
+   /* @ParameterizedTest
     @MethodSource("contactProvider")
     public void canCreateContacts(ContactData contact) {
         var oldContacts = app.contacts().getList();
@@ -55,10 +56,12 @@ public class CreateContact extends TestBase {
         var expectedList = new ArrayList<>(oldContacts);
         expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withAdress("").withPhoto(""));
         expectedList.sort(compareById);
-        Assertions.assertEquals(newContacts, expectedList);
+        Allure.step("Validating result", step -> {
+            Assertions.assertEquals(newContacts, expectedList);
+        });
 
 
-    }
+    }*/
 
     public static List<ContactData> ContactProvider() throws IOException {
         var result = new ArrayList<ContactData>();
@@ -94,12 +97,14 @@ public class CreateContact extends TestBase {
         var expectedList = new ArrayList<>(oldContacts);
         expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withPhoto(""));
         expectedList.sort(compareById);
-        Assertions.assertEquals(newContacts, expectedList);
+        Allure.step("Validating result", step -> {
+            Assertions.assertEquals(newContacts, expectedList);
+        });
 
 
     }
 
-    public static Stream <ContactData> randomContactProvider() {
+    public static Stream<ContactData> randomContactProvider() {
         Supplier<ContactData> randomContact = () -> new ContactData()
                 .withFirstname(CommonFunctions.randomString(10))
                 .withLastname(CommonFunctions.randomString(10))

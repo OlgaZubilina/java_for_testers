@@ -2,6 +2,7 @@ package ru.stqa.adressbook.tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.Allure;
 import ru.stqa.adressbook.common.CommonFunctions;
 import ru.stqa.adressbook.model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -62,7 +63,8 @@ public class CreateGroup extends TestBase {
         var expectedList = new ArrayList<>(oldGroups);
         expectedList.add(group.withId(newGroups.get(newGroups.size() - 1).id()).withHeader("").withFooter(""));
         expectedList.sort(compareById);
-        Assertions.assertEquals(newGroups, expectedList);
+        Allure.step("Validating result", step ->{ Assertions.assertEquals(newGroups, expectedList);});
+
 
     }
 
@@ -84,8 +86,7 @@ public class CreateGroup extends TestBase {
         var newId = extraGroups.get(0).id();
         var expectedList = new ArrayList<>(oldGroups);
         expectedList.add(group.withId(newId));
-        Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));
-        var newUiGroups = app.groups().getList();
+        Allure.step("Validating result",step ->{Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));});
 
     }
 
@@ -95,6 +96,7 @@ public class CreateGroup extends TestBase {
         var oldGroups = app.groups().getList();
         app.groups().createGroup(group);
         var newGroups = app.groups().getList();
-        Assertions.assertEquals(newGroups, oldGroups);
+        Allure.step("Validating result",step ->{Assertions.assertEquals(newGroups, oldGroups);});
+
     }
 }

@@ -184,10 +184,12 @@ public class ContactsHelper extends HelperBase {
     }
 
     public String getPhones(ContactData contact) {
+        openContactsPage();
         return manager.driver.findElement(By.xpath(String.format("//input[@id='%s']/../../td[6]",contact.id()))).getText();
     }
 
     public String getEmails(ContactData contact) {
+        openContactsPage();
         return manager.driver.findElement(By.xpath(String.format("//input[@id='%s']/../../td[5]",contact.id()))).getText();
     }
 

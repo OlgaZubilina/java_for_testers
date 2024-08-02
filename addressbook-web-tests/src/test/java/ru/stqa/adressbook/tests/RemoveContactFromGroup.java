@@ -1,5 +1,6 @@
 package ru.stqa.adressbook.tests;
 
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.stqa.adressbook.common.CommonFunctions;
@@ -16,9 +17,9 @@ public class RemoveContactFromGroup extends TestBase {
 
     @Test
     public void canRemoveContactFromGroup() {
+        Allure.step("Checking precondition", step ->{if (app.groups().getList().size()==0)
+            app.groups().createGroup(new GroupData().withName("test"));});
 
-        if (app.groups().getList().size()==0)
-            app.groups().createGroup(new GroupData().withName("test"));
         var group = app.groups().getList().get(0);
 
         app.contacts().filterContactsByGroup(group);
@@ -40,7 +41,8 @@ var contactsFilter = app.contacts().getList();
         };
         newContactsWithoutGroup.sort(compareById);
         expectedList.sort(compareById);
-        Assertions.assertEquals(newContactsWithoutGroup, expectedList);
+        Allure.step("Validating result",step ->{Assertions.assertEquals(newContactsWithoutGroup, expectedList);});
+
 
 }
 
