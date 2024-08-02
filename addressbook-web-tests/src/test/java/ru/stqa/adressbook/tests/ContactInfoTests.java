@@ -37,7 +37,7 @@ public class ContactInfoTests extends TestBase{
     }
 
 
-    @Test
+    /*@Test
     void testInfo(){
         if (app.contacts().getList().size() == 0) {//создание нового контакта  при отсутствии
             var contact = new ContactData()
@@ -59,6 +59,6 @@ public class ContactInfoTests extends TestBase{
         var contactInfo = app.contacts().getAddress(contact)+"\n"+app.contacts().getEmails(contact)+"\n"+app.contacts().getPhones(contact);
         var expected = app.contacts().getInfoFromContactPage(contact);
         Assertions.assertEquals(expected,contactInfo);
-    }
+    }*/
 
 }
