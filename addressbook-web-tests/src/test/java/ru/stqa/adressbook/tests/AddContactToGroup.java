@@ -33,10 +33,16 @@ public class AddContactToGroup extends TestBase
 
    if (allContacts.size() == 0) {//создаем контакт без группы если в предыдущем шаге список пустой
         var contact = new ContactData()
-                .withFirstname(CommonFunctions.randomString(6))
-                .withLastname(CommonFunctions.randomString(6))
-                .withAdress(CommonFunctions.randomString(6))
-                .withPhoto(CommonFunctions.randomFile("src/test/resources/images"));
+                .withFirstname(CommonFunctions.randomString(10))
+                .withLastname(CommonFunctions.randomString(10))
+                .withAdress(CommonFunctions.randomString(10))
+                .withPhoto(CommonFunctions.randomFile("src/test/resources/images"))
+                .withHome(CommonFunctions.randomInteger(10))
+                .withMobile(CommonFunctions.randomInteger(10))
+                .withWork(CommonFunctions.randomInteger(10))
+                .withEmail(CommonFunctions.randomString(8))
+                .withEmail2(CommonFunctions.randomString(8))
+                .withEmail3(CommonFunctions.randomString(8));
         app.contacts().createContact(contact);
         allContacts = app.contacts().getList();
         app.contacts().filterContactsByGroup(group);
