@@ -94,10 +94,10 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void openContactCreatePage() {
-        if (!manager.isElementPresent(By.name("submit"))) {//переход в раздел контакта при отсутсвии кнопки "enter"
+         //if (!manager.isElementPresent(By.name("submit"))) {//переход в раздел контакта при отсутсвии кнопки "enter"
             click(By.linkText("add new"));
 
-        }
+
     }
 
     public int getCount() {

@@ -24,7 +24,7 @@ public class UpdateContact extends TestBase {
 
         var oldContacts = app.contacts().getList();
         var rnd = new Random();
-        var index = rnd.nextInt(oldContacts.size());
+        var index = rnd.nextInt(oldContacts.size()-1);
         var testData = new ContactData().withFirstname("update firstname").withPhoto(CommonFunctions.randomFile("src/test/resources/images"));
         app.contacts().updateContact(oldContacts.get(index), testData);
         var newContacts = app.contacts().getList();
